@@ -8,7 +8,7 @@ class ResourceMaster:
     def __init__(self, path, port, outpath, signature):
         self.path = path
         self.port = port
-        self.data_output = outpath
+        self.data_outpath = outpath
         self.signature = signature
         self.conn = rpyc.connect(self.path, self.port)
         self.expired = False
@@ -36,7 +36,7 @@ class ResourceMaster:
         filename = filename[:-1]
         filename = filename + '.simulation'
 
-        pickle.dump(to_write, open(filename, 'wb'))
+        pickle.dump(to_write, open(self.data_outpath + filename, 'wb'))
         return
 
     def close(self):

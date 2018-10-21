@@ -17,9 +17,9 @@ class ResourceSlave(rpyc.Service):
         return
 
     def exposed_execute_simulation(self, hyperparams):
-        print('Slave copy: ', hyperparams)
-        '''
-        from payload.test import test_fn
-        res = test_fn(**hyperparams)
-        '''
-        return hyperparams['arg']
+        from payload.entry import entry
+        #NOTE for sume reason unpacking hyperparams here results
+        #in an error, so we are just going to pass the whole dict
+        #for now
+        res = entry(hyperparams)
+        return res
