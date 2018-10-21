@@ -1,3 +1,11 @@
+import itertools
+
+def dictionary_product(kwargs):
+    keys = kwargs.keys()
+    vals = kwargs.values()
+    for instance in itertools.product(*vals):
+        yield dict(zip(keys, instance))
+
 class GridSimulationTemplate:
     def __init__(self, hyperparams={}):
         '''
@@ -8,12 +16,6 @@ class GridSimulationTemplate:
         return
 
 
-    def dictionary_product(kwargs):
-        keys = kwargs.keys()
-        vals = kwargs.values()
-        for instance in itertools.product(*vals):
-            yield dict(zip(keys, instance))
-
 
     def get_hyperparam_generator(self):
         '''
@@ -21,4 +23,4 @@ class GridSimulationTemplate:
         :return: a generator of all hyperparameter assignments to be run
         '''
 
-        return dictionary_product(**self.hyperparams)
+        return dictionary_product(self.hyperparams)
